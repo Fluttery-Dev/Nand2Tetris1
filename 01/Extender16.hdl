@@ -1,4 +1,4 @@
-CHIP Extender{
+CHIP Extender16{
     IN in;
     OUT out[16];
 
