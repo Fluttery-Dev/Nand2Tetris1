@@ -17,4 +17,30 @@ CHIP Mux4Way16 {
 
     PARTS:
     // Put your code here:
+
+    Not(in=sel[0], out=notSel0);
+    Not(in=sel[1], out=notSel1);
+
+    Extender16(in=notSel0, out=NotSel0);
+    Extender16(in=notSel1, out=NotSel1);
+    Extender16(in=sel[0], out=Sel0);
+    Extender16(in=sel[1], out=Sel1);
+
+    And16(a=a, b=NotSel0, out=temp1);
+    And16(a=temp1, b=NotSel1, out=A);
+
+    
+    And16(a=b, b=Sel0, out=temp2);
+    And16(a=temp2, b=NotSel1, out=B);
+    
+    And16(a=c, b=NotSel0, out=temp3);
+    And16(a=temp3, b=Sel1, out=C);
+    
+    And16(a=d, b=Sel0, out=temp4);
+    And16(a=temp4, b=Sel1, out=D);
+
+    Add16(a=A, b=B, out=temp5);
+    Add16(a=C, b=D, out=temp6);
+    Add16(a=temp5, b=temp6, out=out);
+
 }
