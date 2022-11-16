@@ -19,16 +19,12 @@ CHIP PC {
     // Put your code here:
     
     
-    Add16(a=outloop, b[0]=true, b[1..15]=false, out=outloopInc);
-    Mux16(a=outloop, b=outloopInc, sel=inc, out=t0);
-    Mux16(a=t0, b=in, sel=load, out=t1);
-    Mux16(a=t1, b=false, sel=reset, out=t2);
+    Inc16(in=outIn, out=incOut);
+    Mux16(a=outIn, b=incOut, sel=inc, out=out1);
 
-    // loading logic
-    Or(a=load, b=inc, out=loadOrInc);
-    Or(a=loadOrInc, b=reset, out=loadRAM);
+    Mux16(a=out1, b=in, sel=load, out=outLoad);
+    Mux16(a=outLoad, b=false, sel=reset, out=outT);
 
-    // timestep
-    RAM8(in=t2, load=loadRAM, out=outloop, out=out);
+    Register(in=outT, load=true, out=out, out=outIn);
 
 }
