@@ -1,0 +1,16 @@
+@0
+D=M;null
+@1
+D=D-M;null
+@10
+null=D;JGT
+@1
+D=M;null
+@12
+null=0;JMP
+@0
+D=M;null
+@2
+M=D;null
+@14
+null=0;JMP
